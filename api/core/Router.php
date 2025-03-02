@@ -29,7 +29,7 @@ class Router {
     public function handleRequest() {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         $requestUri = $this->getProcessedUri();
-        $queryParams = $_GET; // Capture query parameters
+        $queryParams = $_GET; 
 
         error_log("Request Method: " . $requestMethod);
         error_log("Request URI: " . $requestUri);
@@ -40,34 +40,28 @@ class Router {
             return;
         }
 
-        // ✅ Handle cases where `id` is provided as a query parameter (`?id=13`)
         if (isset($queryParams['id'])) {
             $studentId = $queryParams['id'];
             error_log("Query parameter detected: id=" . $studentId);
 
-            // 🔍 Match requests for specific endpoints that accept `id` as a query parameter
             switch ($requestUri) {
                 case "students":
-                    // Redirect `GET students?id=13` → `students/{id}`
                     [$controllerClass, $method] = $this->routes['GET']['students/{id}'];
                     $this->dispatch([$controllerClass, $method], [$studentId]);
                     return;
 
                 case "students/update":
-                    // Redirect `PUT students/update?id=13` → `students/update/{id}`
                     [$controllerClass, $method] = $this->routes['PUT']['students/update/{id}'];
                     $this->dispatch([$controllerClass, $method], [$studentId, $this->getRequestData()]);
                     return;
 
                 case "student/delete":
-                    // Redirect `DELETE student/delete?id=13` → `student/delete/{id}`
                     [$controllerClass, $method] = $this->routes['DELETE']['student/delete/{id}'];
                     $this->dispatch([$controllerClass, $method], [$studentId]);
                     return;
             }
         }
 
-        // 🔍 Normal route matching for URL paths like `/students/1`
         foreach ($this->routes[$requestMethod] as $route => $handler) {
             $pattern = $this->convertToRegex($route);
             error_log("Checking route: " . $route . " with pattern: " . $pattern);
@@ -78,7 +72,6 @@ class Router {
 
                 [$controllerClass, $method] = $handler;
 
-                // 🔹 Pass request data for POST requests
                 if ($requestMethod === 'POST') {
                     $this->dispatch([$controllerClass, $method], [$this->getRequestData()]);
                 } else {
@@ -105,7 +98,7 @@ class Router {
 
     private function getRequestData() {
         $data = json_decode(file_get_contents('php://input'), true);
-        return is_array($data) ? $data : []; // Ensure it's an array
+        return is_array($data) ? $data : []; 
     }
 
     private function dispatch(array $handler, array $params) {
