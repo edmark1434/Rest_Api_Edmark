@@ -25,12 +25,7 @@ class StudentRepositories implements IBaseRepository {
         if ($id) {
             $query = "SELECT * FROM {$this->table} WHERE student_id = :id";
             $result = $this->executeQuery($query, [':id' => $id]);
-            
-            if (empty($result)) {
-                echo json_encode(["error" => "Student with ID {$id} not found"]);
-                return null;
-            }
-
+            $this->validationCalculation->validateExistingStudent($result,$id);
             return $this->BuildResult($result);
         }
         return null;
@@ -69,12 +64,9 @@ class StudentRepositories implements IBaseRepository {
 
     public function updateStud($id, $entity): void {
         $existingStudent = $this->getStudById($id);
-        
-        if (!$existingStudent) {
-            echo json_encode(["error" => "Student with ID {$id} not found"]);
+        if(!$existingStudent){
             return;
         }
-
         $this->validationCalculation->validateStudent($entity,'PUT');
 
         $midterm_score = $entity['midterm_score'];

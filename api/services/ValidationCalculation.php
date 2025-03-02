@@ -21,5 +21,11 @@ class validationCalculation {
                 throw new Exception("Student Final Score is required");
         }
     }
+    public function validateExistingStudent($student,$id){
+        if(empty($student)){
+            echo json_encode(["error" => "Student with ID {$id} not found"]);
+        }
+        return;
+    }
 }
 ?>
