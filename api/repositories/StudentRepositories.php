@@ -15,16 +15,10 @@ class StudentRepositories implements IBaseRepository {
         $this->validationCalculation = new ValidationCalculation();
     }
 
-    public function getAllStud(?int $id = null) : array {
-        if ($id) {
-            $query = "SELECT * FROM {$this->table} WHERE student_id = :id";
-            $result = $this->executeQuery($query, [':id' => $id]);
-            return $this->BuildResultList($result);
-        } else {
+    public function getAllStud() : array {
             $query = "SELECT * FROM {$this->table}";
             $result = $this->executeQuery($query, []);
             return $this->BuildResultList($result);
-        }
     }
 
     public function getStudById(?int $id = null) : ?Student {
