@@ -43,7 +43,6 @@ class StudentRepositories implements IBaseRepository {
         $midterm_score = $entity['midterm_score'];
         $final_score = $entity['final_score'];
 
-        // Calculate the final grade
         $final_grade = $this->validationCalculation->calculateGrade($midterm_score, $final_score);
         $status = $this->validationCalculation->calculateStatus($final_grade);
 
@@ -81,7 +80,6 @@ class StudentRepositories implements IBaseRepository {
         $midterm_score = $entity['midterm_score'];
         $final_score = $entity['final_score'];
 
-        // Calculate the final grade
         $final_grade = $this->validationCalculation->calculateGrade($midterm_score, $final_score);
         $status = $this->validationCalculation->calculateStatus($final_grade);
 
