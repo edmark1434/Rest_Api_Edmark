@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "dd4bb6bd-9460-446a-b3c9-23155f2d2c89",
+		"name": "Student_Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39133545"
+	},
+	"item": [
+		{
+			"name": "getAllStud",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest_api/api/students/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest_api",
+						"api",
+						"students",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStudById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest_api/api/students/?id=18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest_api",
+						"api",
+						"students",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addStud",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"student_name\": \"edmark\",\r\n    \"midterm_score\": 20,\r\n    \"final_score\": 40\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/rest_api/api/student",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest_api",
+						"api",
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateStud",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"midterm_score\": 29,\r\n    \"final_score\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/rest_api/api/students/update/?id=18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest_api",
+						"api",
+						"students",
+						"update",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteStud",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest_api/api/student/delete/?id=18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest_api",
+						"api",
+						"student",
+						"delete",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
