@@ -2,14 +2,17 @@
 require_once "config\Database.php";
 require_once "model\Student.php";
 require_once "contract\IBaseRepository.php";
+require_once "services\gradeCalculation.php";
 
 class StudentRepositories implements IBaseRepository {
     private $databaseContext;
     private $table;
+    private $gradeCalculation;
 
     public function __construct($database_context, $table) {
         $this->databaseContext = $database_context; 
         $this->table = $table;
+        $this->gradeCalculation = new GradeCalculation();
     }
 
     public function getAllStud(?int $id = null) : array {
@@ -40,23 +43,15 @@ class StudentRepositories implements IBaseRepository {
     }
 
     public function addStud($entity) {
-        if (!isset($entity['student_name']) || empty(trim($entity['student_name']))) {
-            throw new Exception("Student Name is required");
-        }
-        if (!isset($entity['midterm_score']) || empty(trim($entity['midterm_score']))) {
-            throw new Exception("Student Midterm Score is required");
-        }
-        if (!isset($entity['final_score']) || empty(trim($entity['final_score']))) {
-            throw new Exception("Student Final Score is required");
-        }
+        $this->validateStudent($entity,'POST');
 
         $student_name = $entity['student_name'];
         $midterm_score = $entity['midterm_score'];
         $final_score = $entity['final_score'];
 
         // Calculate the final grade
-        $final_grade = (0.4 * $midterm_score) + (0.6 * $final_score);
-        $status = $final_grade >= 75 ? "PASSED" : "FAIL";
+        $final_grade = $this->gradeCalculation->calculateGrade($midterm_score, $final_score);
+        $status = $this->gradeCalculation->calculateStatus($final_grade);
 
         $student = new Student();
         $student->student_name = $student_name;
@@ -87,18 +82,14 @@ class StudentRepositories implements IBaseRepository {
             return;
         }
 
-        if (!isset($entity['midterm_score']) || empty(trim($entity['midterm_score']))) {
-            throw new Exception("Student Midterm Score is required");
-        }
-        if (!isset($entity['final_score']) || empty(trim($entity['final_score']))) {
-            throw new Exception("Student Final Score is required");
-        }
+        $this->validateStudent($entity,'PUT');
+
         $midterm_score = $entity['midterm_score'];
         $final_score = $entity['final_score'];
 
         // Calculate the final grade
-        $final_grade = (0.4 * $midterm_score) + (0.6 * $final_score);
-        $status = $final_grade >= 75 ? "PASSED" : "FAIL";
+        $final_grade = $this->gradeCalculation->calculateGrade($midterm_score, $final_score);
+        $status = $this->gradeCalculation->calculateStatus($final_grade);
 
         $query = "UPDATE {$this->table} 
             SET midterm_score = :md_score, final_score = :final_score, 
@@ -172,6 +163,20 @@ class StudentRepositories implements IBaseRepository {
             return $statementObject->fetchAll(PDO::FETCH_ASSOC);
         }
         return null;
+    }
+
+    private function validateStudent($entity, string $request_type) {
+        if($request_type == 'POST') {
+            if (!isset($entity['student_name']) || empty(trim($entity['student_name']))) {
+                throw new Exception("Student Name is required");
+            }
+        }
+        if (!isset($entity['midterm_score']) || empty(trim($entity['midterm_score']))) {
+                throw new Exception("Student Midterm Score is required");
+        }
+        if (!isset($entity['final_score']) || empty(trim($entity['final_score']))) {
+                throw new Exception("Student Final Score is required");
+        }
     }
 }
 ?>
