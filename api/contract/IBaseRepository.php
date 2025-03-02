@@ -5,6 +5,6 @@ interface IBaseRepository {
     public function getStudById(int $id);
     public function addStud($entity);
     public function updateStud(int $id, $entity);
-    public function deleteStud(int $id); // Corrected method name
+    public function deleteStud(int $id); 
 }
 ?>
