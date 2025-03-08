@@ -12,13 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/rest_api/api/students/",
+					"raw": "http://localhost/Rest_Api_Edmark/api/students/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"rest_api",
+						"Rest_Api_Edmark",
 						"api",
 						"students",
 						""
@@ -33,13 +33,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/rest_api/api/students/?id=18",
+					"raw": "http://localhost/Rest_Api_Edmark/api/students/?id=18",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"rest_api",
+						"Rest_Api_Edmark",
 						"api",
 						"students",
 						""
@@ -61,7 +61,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"student_name\": \"edmark\",\r\n    \"midterm_score\": 20,\r\n    \"final_score\": 40\r\n}",
+					"raw": "{\r\n    \"student_name\": \"TRY\",\r\n    \"midterm_score\": 50,\r\n    \"final_score\": 50\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,12 +69,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost/rest_api/api/student",
+					"raw": "http://localhost/Rest_Api_Edmark/api/student",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"rest_api",
+						"Rest_Api_Edmark",
 						"api",
 						"student"
 					]
@@ -89,7 +90,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"midterm_score\": 29,\r\n    \"final_score\": 100\r\n}",
+					"raw": "{\r\n    \"midterm_score\": 89,\r\n    \"final_score\": 100\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -97,13 +98,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/rest_api/api/students/update/?id=18",
+					"raw": "http://localhost/Rest_Api_Edmark/api/students/update/?id=18",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"rest_api",
+						"Rest_Api_Edmark",
 						"api",
 						"students",
 						"update",
@@ -125,13 +126,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/rest_api/api/student/delete/?id=18",
+					"raw": "http://localhost/Rest_Api_Edmark/api/student/delete/?id=18",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"rest_api",
+						"Rest_Api_Edmark",
 						"api",
 						"student",
 						"delete",
