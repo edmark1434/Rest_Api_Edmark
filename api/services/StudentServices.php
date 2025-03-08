@@ -22,7 +22,6 @@ class StudentServices {
 
     public function addStudent($entity){
         $this::validateInput($entity, "POST");
-
         $student = $this::StudentFormat($entity,"POST");
         $this->studentrepo->addStud($student);
     }
