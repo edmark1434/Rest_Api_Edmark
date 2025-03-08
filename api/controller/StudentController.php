@@ -47,7 +47,7 @@ class StudentController {
         try{
             $result = $this->student_services->deleteStudent($id);
             echo ($result !== null) ? "{$result}":"Student Deleted Successfully";
-        }Catch(Exception $e){
+        }catch(Exception $e){
             error_log("Request Handling Error: {$e->getMessage()}");
         }
     }
