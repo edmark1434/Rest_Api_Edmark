@@ -44,7 +44,7 @@ class StudentServices {
     public function validateInput($entity, string $request_type) {
         if ($request_type == 'POST') {
             if (!isset($entity['student_name']) || trim($entity['student_name']) === "") {
-                echo ("Student Name is required");
+                throw new Exception ("Student Name is required");
             }
         }
 
